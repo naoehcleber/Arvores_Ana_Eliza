@@ -13,11 +13,17 @@ public class App {
 				switch(op) {
 				case 1: System.out.println("Informe um numero inteiro : ");
 					num = input.nextInt();
-					arvore.insert(num);
+					arvore.insertNovo(num);
 					break;
 				case 2 : System.out.println("Informe um numero inteiro : ");
 				num = input.nextInt();
 				arvore.buscarRetorno(num);
+					break;
+				case 3 : 
+					arvore.menorValor();
+					break;
+				case 4 :
+					arvore.maiorValor();
 					break;
 				case 0 : System.out.println("Tchau tchau !");
 					break;
@@ -32,6 +38,8 @@ public class App {
 		System.out.println("Opcoes");
 		System.out.println("1 - Inserir Valor");
 		System.out.println("2 - Procurar Valor");
+		System.out.println("3 - Procurar Menor Valor");
+		System.out.println("4 - Procurar Maior Valor");
 		System.out.println("0 - Encerrar programa");
 		System.out.println("Informe a opcao");
 	}

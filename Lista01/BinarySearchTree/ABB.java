@@ -109,11 +109,23 @@ public class ABB {
                     }else {
                     	aux.setLeft(novo);
                     	System.out.println("Insercao Efetuada!");
+                    	return;
+                    }
+        		} else if (retorno > 0) {
+                    	ant = aux;
+                    	if(aux.getRight() != null) {
+                    		aux = aux.getRight();
+                    	} else {
+                    		aux.setRight(novo);
+                    		System.out.println("Insercao Efetuada !");
+                    		return;
+                    	}
                     	
                     }
         		}
         	}
-        }
+        
+    	
     }
     
     private Integer buscar(Integer value) {
@@ -148,5 +160,51 @@ public class ABB {
     		System.out.println("Valor encontrado");
     		System.out.println(buscar(value));
     	}
+    }
+    
+    private ABBNode menorNo() {
+    	ABBNode aux;
+    	
+    	
+    	if(this.isEmpty() == true) {
+    		System.out.println("Arvore vazia !");
+    		return null;
+    	} else {
+    		aux = this.root;
+    		while(aux.getLeft() != null) {
+    			aux = aux.getLeft();
+    		}
+    		return aux;
+    	}
+    }
+    
+    private ABBNode maiorNo() {
+    	ABBNode aux;
+    	
+    	
+    	if(this.isEmpty() == true) {
+    		System.out.println("Arvore vazia !");
+    		return null;
+    	} else {
+    		aux = this.root;
+    		while(aux.getRight() != null) {
+    			aux = aux.getRight();
+    		}
+    		return aux;
+    	}
+    }
+    
+    public void menorValor() {
+    	ABBNode menor;
+    	
+    	menor = menorNo();
+    	
+    	System.out.println("Menor No: " + menor.getInfo());
+    }
+    
+    public void maiorValor() {
+    	ABBNode maior;
+    	maior = maiorNo();
+    	System.out.println("Maior No: "+ maior.getInfo());
     }
 }
