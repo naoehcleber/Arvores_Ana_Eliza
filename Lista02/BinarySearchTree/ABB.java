@@ -1,4 +1,6 @@
 package BinarySearchTree;
+import TADStack.Stack;
+
 
 class ABBNode {
     private ABBNode left;
@@ -36,7 +38,7 @@ class ABBNode {
 
 public class ABB {
     private ABBNode root;
-    QueueNode queue = new QueueNode();
+    
 
     public boolean isEmpty () {
         if (this.root == null) {
@@ -209,24 +211,95 @@ public class ABB {
     	System.out.println("Maior No: "+ maior.getInfo());
     }
     
-    public ABBNode porNivel() {
-    	if(queue.isEmpty() == true) {
-    		return null;
+    public void porNivel() {
+    	ABBNode aux;
+    	if(this.isEmpty() == false) {
+    		QueueNode fila = new QueueNode();
+    		fila.enqueue(root);
+    		while(fila.isEmpty() == false) {
+    			aux = fila.dequeue();
+    			if(aux.getLeft() != null) {
+    				fila.enqueue(aux.getLeft());
+    				
+    			}
+    			if (aux.getRight() != null) {
+    				fila.enqueue(aux.getRight());
+    			}
+    			System.out.println(aux.getInfo());
+    			
+    		}
+    	} else {
+    		System.out.println("Arvore Vazia !");
     	}
-    	while(true) {
-    		queue.enqueue(root);
-    		if(root.getLeft()!= null) {
-    			queue.enqueue(root.getLeft());
-    		}
-    		if(root.getRight() != null) {
-    			queue.enqueue(root.getRight());
-    		}
-    		if(root.getRight() == null && root.getLeft() == null) {
-    			break;
+    	
+    }
+    
+    public void emOrdem() {
+    	 Stack<ABBNode> pilha;
+    	 ABBNode aux;
+    	if(this.isEmpty() == false ) {
+    		pilha = new Stack<ABBNode>();
+    		aux = this.root;
+    		while(pilha.isEmpty() == false || aux != null) {
+    			while(aux != null) {
+    				pilha.push(aux);
+    				aux = aux.getLeft();
+    			}
+    			aux = pilha.pop();
+    			System.out.println(aux.getInfo());
+    			aux = aux.getRight();
     		}
     		
+    	} else {
+    		System.out.println("Arvore Vazia!");
     	}
     }
     
+    	
+    public void preOrdem() {
+    	Stack<ABBNode> pilha;
+    	ABBNode aux;
+    	if(this.isEmpty() == false) {
+    		
+    		pilha = new Stack<ABBNode>();
+    		aux = this.root;
+    		pilha.push(aux);
+    		while (!pilha.isEmpty()) {
+    	        aux = pilha.pop();
+    	        System.out.println(aux.getInfo());
+
+    	        // Primeiro empilha o nó da subárvore à direita
+    	        if (aux.getRight() != null) {
+    	            pilha.push(aux.getRight());
+    	        }
+    	        // Depois empilha o nó da subárvore à esquerda
+    	        if (aux.getLeft() != null) {
+    	            pilha.push(aux.getLeft());
+    	        }
+    	    }
+    	}else {
+    		System.out.println("Arvore vazia!");
+    	}
+    }
+    public void contagemDeNosRecursiva() {
+    	if(this.isEmpty() == true) {
+    		System.out.println("Arvore vazia");
+    		
+    	}else {
+    		System.out.println(this.contarNos(root));
+    	}
+    }
+    public Integer contarNos(ABBNode node) {
+    	int numero = 0;
+    	if(node != null) {
+    		
+    		numero = numero + 1;
+    		contarNos(node.getLeft());
+    		contarNos(node.getRight());
+    	}
+    	
+    	return numero;
+    	
+    }
     
 }

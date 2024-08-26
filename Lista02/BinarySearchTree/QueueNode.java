@@ -40,10 +40,10 @@ public class QueueNode {
 			this.end = novo;
 		}
 		
-		System.out.println(node + "Enqued");
+		
 	}
 	
-	public ABBNode dequeue(ABBNode node) {
+	public ABBNode dequeue() {
 		ABBNode retorno;
 		
 		if(isEmpty() == true) {

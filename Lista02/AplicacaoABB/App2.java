@@ -27,6 +27,16 @@ public class App2 {
 					break;
 				case 5:
 					arvore.porNivel();
+					break;
+				case 6:
+					arvore.emOrdem();
+					break;
+				case 7:
+					arvore.preOrdem();
+					break;
+				case 8 :
+					arvore.contagemDeNosRecursiva();
+					break;
 				case 0 : System.out.println("Tchau tchau !");
 					break;
 					
@@ -43,6 +53,9 @@ public class App2 {
 		System.out.println("3 - Procurar Menor Valor");
 		System.out.println("4 - Procurar Maior Valor");
 		System.out.println("5 - Realizar passeio por nivel");
+		System.out.println("6 - Realizar passeio em ordem");
+		System.out.println("7 - Realizar passeio pre ordem");
+		System.out.println("8 - Contar numero de nos na arvore");
 		System.out.println("0 - Encerrar programa");
 		System.out.println("Informe a opcao");
 	}
