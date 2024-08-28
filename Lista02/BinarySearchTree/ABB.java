@@ -289,17 +289,180 @@ public class ABB {
     		System.out.println(this.contarNos(root));
     	}
     }
-    public Integer contarNos(ABBNode node) {
-    	int numero = 0;
-    	if(node != null) {
-    		
-    		numero = numero + 1;
-    		contarNos(node.getLeft());
-    		contarNos(node.getRight());
-    	}
+    private Integer contarNos(ABBNode node) {
     	
-    	return numero;
+    	if(node != null) {
+    		return 1 + contarNos(node.getLeft()) + contarNos(node.getRight());
+    	} else {
+    		return 0;
+    	}
+
     	
     }
     
+    public void contagemDeNosNaoRecursiva() {
+    	if(this.isEmpty() == true) {
+    		System.out.println("Arvore vazia");
+    		
+    	}else {
+    		System.out.println("Nos: " + this.contarNosSemRecursao());
+    	}
+    }
+    
+    
+    private Integer contarNosSemRecursao() {
+    	Stack<ABBNode> pilha;
+    	ABBNode aux;
+    	int contador;
+    	
+    	if(this.isEmpty() == true) {
+    		return 0;
+    	}
+    	contador = 0;
+    	
+    	pilha = new Stack<ABBNode>();
+		aux = this.root;
+		pilha.push(aux);
+		while (!pilha.isEmpty()) {
+	        aux = pilha.pop();
+	        contador += 1;
+	        
+
+	        // Primeiro empilha o nó da subárvore à direita
+	        if (aux.getRight() != null) {
+	            pilha.push(aux.getRight());
+	        }
+	        // Depois empilha o nó da subárvore à esquerda
+	        if (aux.getLeft() != null) {
+	            pilha.push(aux.getLeft());
+	        }
+	   }
+    	
+    	return contador;
+    	
+    	
+    }
+    
+    
+    public void contarFolhasRecursivo() {
+    	if(this.isEmpty() == true) {
+    		System.out.println("Arvore vazia");
+    		
+    	}else {
+    		System.out.println("Folhas: " + this.contarFolhasRecursao(this.root));
+    	}
+    }
+    
+    private Integer contarFolhasRecursao(ABBNode node) {
+    	
+    	if(node.getLeft() == null && node.getRight() == null) {
+    		return 1;
+    	}
+    	return contarFolhasRecursao(node.getLeft()) + contarFolhasRecursao(node.getRight());
+    }
+    
+    public void contarFolhasNaoRecursivo() {
+    	if(this.isEmpty() == true) {
+    		System.out.println("Arvore vazia");
+    		
+    	}else {
+    		System.out.println("Folhas: " + this.contarFolhasSemRecursao());
+    	}
+    }
+    
+    private Integer contarFolhasSemRecursao() {
+    	Stack<ABBNode> pilha;
+    	ABBNode aux;
+    	int contador;
+    	
+    	if(this.isEmpty() == true) {
+    		return 0;
+    	}
+    	contador = 0;
+    	
+    	pilha = new Stack<ABBNode>();
+		aux = this.root;
+		pilha.push(aux);
+		while (!pilha.isEmpty()) {
+	        aux = pilha.pop();
+	        
+	        if(aux.getLeft() == null && aux.getRight() == null) {
+	        	contador += 1;
+	        }
+
+	        // Primeiro empilha o nó da subárvore à direita
+	        if (aux.getRight() != null) {
+	            pilha.push(aux.getRight());
+	        }
+	        // Depois empilha o nó da subárvore à esquerda
+	        if (aux.getLeft() != null) {
+	            pilha.push(aux.getLeft());
+	        }
+	   }
+    	
+    	return contador;
+    }
+    
+    public void contarNaoTerminaisRecursivo() {
+    	if(this.isEmpty() == true) {
+    		System.out.println("Arvore vazia");
+    		
+    	}else {
+    		System.out.println("Nao terminais: " + this.contarNaoTerminaisRecursao(this.root));
+    	}
+    }
+    
+    private Integer contarNaoTerminaisRecursao(ABBNode node) {
+    	if(node == null) {
+    		return 0;
+    	}
+    	if(node.getLeft() == null && node.getRight() == null) {
+    		return 0;
+    	}
+    	return 1 + contarNaoTerminaisRecursao(node.getLeft()) + contarNaoTerminaisRecursao(node.getRight());
+    }
+    
+    public void contarNaoTerminaisNaoRecursivo() {
+    	if(this.isEmpty() == true) {
+    		System.out.println("Arvore vazia");
+    		
+    	}else {
+    		System.out.println("Nao terminais: " + this.contarNaoTerminaisNaoRecursao());
+    	}
+    }
+    private Integer contarNaoTerminaisNaoRecursao() {
+    	int contador;
+    	Stack<ABBNode> pilha;
+    	ABBNode aux;
+    	
+    	if(this.isEmpty() == true) {
+    		return 0;
+    	} else {
+    		contador = 0;
+    		pilha = new Stack<ABBNode>();
+    		aux = this.root;
+    		pilha.push(aux);
+    		while(!pilha.isEmpty()) {
+    			
+    				aux = pilha.pop();
+    				if(aux.getLeft() != null || aux.getRight() != null) {
+    					contador += 1;
+    					
+    				}
+    				if(aux.getRight() != null) {
+    					pilha.push(aux.getRight());
+    				}
+    				if(aux.getLeft() != null) {
+    					pilha.push(aux.getLeft());
+    				}
+    			}
+    		
+    		
+    		
+    		return contador;
+    	}
+    	
+    	
+    	
+    }
 }

@@ -37,6 +37,20 @@ public class App2 {
 				case 8 :
 					arvore.contagemDeNosRecursiva();
 					break;
+				case 9 :
+					arvore.contagemDeNosNaoRecursiva();
+					break;
+				case 10 :
+					arvore.contarFolhasRecursivo();
+					break;
+				case 11 :
+					arvore.contarFolhasNaoRecursivo();
+					break;
+				case 12 :
+					arvore.contarNaoTerminaisRecursivo();
+					break;
+				case 13 :
+					arvore.contarNaoTerminaisNaoRecursivo();
 				case 0 : System.out.println("Tchau tchau !");
 					break;
 					
@@ -55,7 +69,12 @@ public class App2 {
 		System.out.println("5 - Realizar passeio por nivel");
 		System.out.println("6 - Realizar passeio em ordem");
 		System.out.println("7 - Realizar passeio pre ordem");
-		System.out.println("8 - Contar numero de nos na arvore");
+		System.out.println("8 - Contar numero de nos na arvore Recursivamente");
+		System.out.println("9 - Contar numero de nos na arvore Não-Recursivamente");
+		System.out.println("10 - Contar numero de folhas na arvore Recursivamente");
+		System.out.println("11 - Contar numero de folhas na arvore Não-Recursivamente");
+		System.out.println("12 - Contar numero de Nos Nao Terminais Recursivamente");
+		System.out.println("13 - Contar numero de Nos Nao Terminais Nao-Recursivamente");
 		System.out.println("0 - Encerrar programa");
 		System.out.println("Informe a opcao");
 	}
