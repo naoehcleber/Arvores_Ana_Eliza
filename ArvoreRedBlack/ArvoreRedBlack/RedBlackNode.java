@@ -5,12 +5,15 @@ class RedblackNode<T>{
     private T info;
     private RedblackNode<T> pai;
     private char cor; // pode ser R (vermelho) ou B (preto)
-
+    private boolean disp;
 
     public RedblackNode(T info){
         this.info = info;
         this.cor = 'R';
+        this.disp = true;
     }
+
+    
 
 
     public RedblackNode<T> getLeft() {
@@ -79,6 +82,14 @@ class RedblackNode<T>{
         
     }
 
-    
+    public boolean isDisp() {
+        return disp;
+    }
+
+    public void setDisp(boolean disp) {
+        this.disp = disp;
+    }
+
+   
 
 } 
