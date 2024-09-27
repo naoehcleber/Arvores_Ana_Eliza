@@ -1,9 +1,9 @@
 package ArvoreRedBlack;
 class RedblackNode<T>{
-    private RedblackNode left;
-    private RedblackNode right;
+    private RedblackNode<T> left;
+    private RedblackNode<T> right;
     private T info;
-    private RedblackNode pai;
+    private RedblackNode<T> pai;
     private char cor; // pode ser R (vermelho) ou B (preto)
 
 
@@ -13,22 +13,22 @@ class RedblackNode<T>{
     }
 
 
-    public RedblackNode getLeft() {
+    public RedblackNode<T> getLeft() {
         return left;
     }
 
 
-    public void setLeft(RedblackNode left) {
+    public void setLeft(RedblackNode<T> left) {
         this.left = left;
     }
 
 
-    public RedblackNode getRight() {
+    public RedblackNode<T> getRight() {
         return right;
     }
 
 
-    public void setRight(RedblackNode right) {
+    public void setRight(RedblackNode<T> right) {
         this.right = right;
     }
 
@@ -43,12 +43,12 @@ class RedblackNode<T>{
     }
 
 
-    public RedblackNode getPai() {
+    public RedblackNode<T> getPai() {
         return pai;
     }
 
 
-    public void setPai(RedblackNode pai) {
+    public void setPai(RedblackNode<T> pai) {
         this.pai = pai;
     }
 
@@ -74,6 +74,9 @@ class RedblackNode<T>{
         } else if (this.pai == this.getAvo().getRight()){
             return this.getAvo().getLeft();
         }
+        // se o avo nao tiver nem esquerda nem direita ou avo for nulo
+        return null;
+        
     }
 
     

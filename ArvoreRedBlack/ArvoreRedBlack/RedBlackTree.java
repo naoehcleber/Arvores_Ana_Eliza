@@ -44,14 +44,36 @@ public class RedBlackTree<T extends Comparable<T>> {
             no.setCor('B');
         } else if (no.getPai().getCor() == 'B'){
             //pai é black
+            if(no.getTio().getCor() == 'B'){
+                //se o tio for black
+                no.setCor('R');
+            } else if (no.getTio().getCor() == 'R'){
+                //se o tio for red
+                rotacao(no);
+            }
         } else if(no.getPai().getCor() == 'R'){
             //pai é vermelho
-            
+            if(no.getTio().getCor() == 'R'){
+                //tio eh vermelho
+                //avo vira vermelho
+                no.getAvo().setCor('R');
+            } else if(no.getTio().getCor() == 'B'){
+                //tio é preto
+                rotacao(no);
+            }
         }
     }
 
-    private void rotacaoEsquerda(RedblackNode<T> no){
-
+    private void rotacao(RedblackNode<T> no){
+        RedblackNode<T> filhoDireita;
+        RedblackNode<T> filhoEsquerda;
+        if(no == no.getPai().getRight()){
+           //rotacao a esquerda
+            filhoDireita = no.getRight();
+            no.setRight(filhoDireita.getLeft());
+        } else if(no == no.getPai().getLeft()){
+            //rotacao a direita
+        }
     }
 
 }
