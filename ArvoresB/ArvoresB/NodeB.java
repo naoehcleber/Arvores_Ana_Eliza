@@ -1,5 +1,7 @@
 package ArvoresB;
 
+import java.lang.ProcessHandle.Info;
+
 class NodeB<T>{
     private int n; // chaves
     
@@ -21,20 +23,28 @@ class NodeB<T>{
         this.n = n;
     }
 
-    public T[] getChaves() {
-        return chaves;
+    public void incrementN(){
+        n++;
     }
 
-    public void setChaves(T[] chaves) {
-        this.chaves = chaves;
+    public void decrementN(){
+        n--;
     }
 
-    public NodeB<T>[] getPonteiro() {
-        return ponteiro;
+    public T[] getChaves(int i) {
+        return chaves[i];
     }
 
-    public void setPonteiro(NodeB<T>[] ponteiro) {
-        this.ponteiro = ponteiro;
+    public void setChaves(int i, T info) {
+        this.chaves[i] = info;
+    }
+
+    public NodeB<T> getPonteiro(int i) {
+        return ponteiro[i];
+    }
+
+    public void setPonteiro(int i,NodeB<T> ponteiro) {
+        this.ponteiro[i] = ponteiro;
     }
 
     public void isFolha(){

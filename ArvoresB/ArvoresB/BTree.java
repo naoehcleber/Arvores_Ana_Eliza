@@ -17,7 +17,13 @@ public class BTree<T extends Comparable> {
         this.root.isFolha();
     }
 
-    
+    public void search (T info, NodeB<T> node){
+        int i = 1;
+        while(i <= node.getN() && info > node.getChaves(i)){
+            i+=1;
+            if(i <= node.getN() && info = node.)
+        }
+    }
 
     public void insert(T info){
         
