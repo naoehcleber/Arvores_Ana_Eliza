@@ -17,12 +17,20 @@ public class BTree<T extends Comparable> {
         this.root.isFolha();
     }
 
-    public void search (T info, NodeB<T> node){
-        int i = 1;
-        while(i <= node.getN() && info > node.getChaves(i)){
+    public NodeB<T> search (T info, NodeB<T> node){
+        int i = 0;
+        while(i <= node.getN() && info.compareTo(node.getChaves(i)) > 0){
             i+=1;
-            if(i <= node.getN() && info = node.)
         }
+
+        if(i <= node.getN() && info.compareTo(node.getChaves(i)) == 0){
+            return node;
+        } else if(node.isFolha()){
+            return null;
+        }
+
+        return search(node.getPonteiro(i), info);
+        
     }
 
     public void insert(T info){
