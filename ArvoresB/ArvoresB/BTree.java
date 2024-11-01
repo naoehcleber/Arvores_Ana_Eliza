@@ -11,11 +11,7 @@ public class BTree<T extends Comparable> {
         }
     }
 
-
-    private void BTreeCreate(){
-        this.root = new NodeB<>(0);
-        this.root.isFolha();
-    }
+   
 
     public NodeB<T> search (T info, NodeB<T> node){
         int i = 0;
@@ -33,20 +29,27 @@ public class BTree<T extends Comparable> {
         
     }
 
-    public void insert(T info){
-        
-
+    public void insert(int m ,T info){
+        //se a arvore estiver vazia
         if(isEmpty() == true){
-            BTreeCreate();
+            root = new NodeB<T>(m);
+            //adiciona na raiz
+            root.adicionarChave(info);
+        } else {
+           //verifica se a raiz está cheia
+           if(root.getN() == m - 1 && root.getPonteiro() == null){
+                //com a raiz cheia ele cria um novo nó
+                NodeB<T> novo;
+                novo = new NodeB<T>(m);
+                root.setPonteiro(novo);
+                //posiciona no primeiro elemento do array chaves do novo nó
+                novo.adicionarChave(info);
+            } else {
+                //com a raiz não cheia ele adiciona nela
+                root.adicionarChave(info);
+            }
         }
-        //verifica se o nó é uma folha 
-        if(novo.getFolha() == true){
-            //verifica de o no está cheio
-            
-        }
-
-        //se nao estiver adiciona nele
-
+        
     }
 
     private void cisao(){

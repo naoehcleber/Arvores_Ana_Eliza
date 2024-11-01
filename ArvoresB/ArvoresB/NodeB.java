@@ -9,10 +9,12 @@ class NodeB<T>{
     private NodeB<T>[] ponteiro;
     private boolean folha;
   
-    // m é a qntd de filhos
+    // m é o grau
     NodeB(int m){
         chaves = (T[]) new Object[m-1];
         ponteiro = new NodeB[m];
+        folha = true;
+        n = 0;
     }
 
     public int getN() {
@@ -35,6 +37,7 @@ class NodeB<T>{
         return chaves[i];
     }
 
+<<<<<<< Updated upstream
     public void setChaves(int i, T info) {
         this.chaves[i] = info;
     }
@@ -45,6 +48,7 @@ class NodeB<T>{
 
     public void setPonteiro(int i,NodeB<T> ponteiro) {
         this.ponteiro[i] = ponteiro;
+
     }
 
     public void isFolha(){
@@ -59,4 +63,20 @@ class NodeB<T>{
     public boolean getFolha(){
         return this.folha;
     }
+
+    public void adicionarChave(T info){
+        if(n < chaves.length - 1){
+            for(int i = 0; i < chaves.length; i++){
+                if(chaves[i] == null){
+                    chaves[i] = info;
+                    n++;
+                    break;
+                }
+            }
+        } else {
+            return;
+        }
+    }
+
+        
 }
