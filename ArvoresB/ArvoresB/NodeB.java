@@ -33,11 +33,10 @@ class NodeB<T>{
         n--;
     }
 
-    public T[] getChaves(int i) {
+    public T getChaves(int i) {
         return chaves[i];
     }
 
-<<<<<<< Updated upstream
     public void setChaves(int i, T info) {
         this.chaves[i] = info;
     }

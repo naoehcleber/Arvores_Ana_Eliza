@@ -21,11 +21,11 @@ public class BTree<T extends Comparable> {
 
         if(i <= node.getN() && info.compareTo(node.getChaves(i)) == 0){
             return node;
-        } else if(node.isFolha()){
+        } else if(node.getFolha()){
             return null;
         }
 
-        return search(node.getPonteiro(i), info);
+        return search(info, node.getPonteiro(i));
         
     }
 
@@ -37,22 +37,20 @@ public class BTree<T extends Comparable> {
             root.adicionarChave(info);
         } else {
            //verifica se a raiz está cheia
-           if(root.getN() == m - 1 && root.getPonteiro() == null){
-                //com a raiz cheia ele cria um novo nó
-                NodeB<T> novo;
-                novo = new NodeB<T>(m);
-                root.setPonteiro(novo);
+           if(root.getN() == m - 1){
+                //com a raiz cheia ele faz uma cisao na raiz
+                cisao(root);
                 //posiciona no primeiro elemento do array chaves do novo nó
-                novo.adicionarChave(info);
+                
             } else {
                 //com a raiz não cheia ele adiciona nela
-                root.adicionarChave(info);
+                
             }
         }
         
     }
 
-    private void cisao(){
-
+    private void cisao(NodeB<T> node){
+        a
     }
 }
