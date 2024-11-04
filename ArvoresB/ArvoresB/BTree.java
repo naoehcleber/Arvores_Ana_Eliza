@@ -13,7 +13,7 @@ public class BTree<T extends Comparable> {
 
    
 
-    public NodeB<T> search (T info, NodeB<T> node){
+    private NodeB<T> search (T info, NodeB<T> node){
         int i = 0;
         while(i <= node.getN() && info.compareTo(node.getChaves(i)) > 0){
             i+=1;
@@ -27,6 +27,23 @@ public class BTree<T extends Comparable> {
 
         return search(info, node.getPonteiro(i));
         
+    }
+
+    public T retornoBusca(T info){
+        //depois de achar o node a gente tem que ir atrás da posição da chave
+        NodeB<T> busca = search(info, root);
+
+        if(busca == null){
+            return null;
+        }
+        
+        //retorna o node
+        for(int i = 0; i < busca.getN(); i++){
+            if(info.compareTo(busca.getChaves(i)) == 0){
+                return busca.getChaves(i);
+            }
+        }
+        return null;
     }
 
     public void insert(int m ,T info){
@@ -51,6 +68,6 @@ public class BTree<T extends Comparable> {
     }
 
     private void cisao(NodeB<T> node){
-        a
+        
     }
 }
