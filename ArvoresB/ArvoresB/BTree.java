@@ -1,5 +1,7 @@
 package ArvoresB;
 
+import org.junit.platform.engine.support.hierarchical.Node;
+
 public class BTree<T extends Comparable> {
     private NodeB<T> root;
 
@@ -46,25 +48,54 @@ public class BTree<T extends Comparable> {
         return null;
     }
 
-    public void insert(int m ,T info){
-        //se a arvore estiver vazia
+    private void insertRaiz(int m, T info){
         if(isEmpty() == true){
             root = new NodeB<T>(m);
             //adiciona na raiz
             root.adicionarChave(info);
         } else {
-           //verifica se a raiz está cheia
-           if(root.getN() == m - 1){
-                //com a raiz cheia ele faz uma cisao na raiz
-                cisao(root);
-                //posiciona no primeiro elemento do array chaves do novo nó
-                
-            } else {
-                //com a raiz não cheia ele adiciona nela
-                
+            //verifica se a raiz tem filhos
+            if(root.getFolha() == true){
+                //raiz nao tem filho
+                //verifica se a raiz está cheia
+                if(root.getN() == m - 1){
+                    //se ela estiver cheia INSERE && FAZ a cisao
+                    cisao(root);
+                    //chama insertRaiz dnv pq a raiz pode ter mudado
+                    insertRaiz(m, info);
+                }else{
+                    //se ela nao estiver cheia
+                    root.adicionarChave(info);
+                }
+            }else{
+                //se tiver filhos nao podemos inserir nela
+                return;
             }
         }
+    }
+
+    private void inserirNaoCheio(int m, T info){
         
+    }
+
+    public void insert(int m ,T info){
+        //se a arvore estiver vazia
+        if(isEmpty() == true){
+            insertRaiz(m, info);
+        } else {
+            //insercao na raiz
+            insertRaiz(m, info);
+        }   if(root.getFolha() == false){
+            //se a raiz tiver filhos
+
+            //percorre até achar o nó correto
+
+            //verifica se há espaço
+            //se estiver cheio faz a cisao
+            //se houver espaco realiza a insercao
+            
+            
+        }
     }
 
     private void cisao(NodeB<T> node){
