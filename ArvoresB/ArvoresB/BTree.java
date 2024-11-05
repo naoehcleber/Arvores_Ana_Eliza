@@ -74,8 +74,11 @@ public class BTree<T extends Comparable> {
         }
     }
 
-    private void inserirNaoCheio(int m, T info){
-
+    private void inserirNaoCheio(int m, T info, NodeB<T> node){
+        int i = node.getN();
+        if(node.getFolha()){
+            while(i>=1 && )
+        }
     }
 
     public void insert(int m ,T info){
@@ -85,18 +88,18 @@ public class BTree<T extends Comparable> {
         } else {
             //insercao na raiz
             insertRaiz(m, info);
-        }   if(root.getFolha() == false){
-            //se a raiz tiver filhos
-
-            //percorre até achar o nó correto
-
-            //verifica se há espaço
-            //se estiver cheio faz a cisao
-            //se houver espaco realiza a insercao
-            
-            
+            if(root.getN() == 2*m-1){
+                NodeB<T> novo;
+                novo = new NodeB<T>(m);
+                novo.setPonteiro(0, root);
+                cisao(novo, 0, m);
+                inserirNaoCheio(m, info, novo);
+            }else {
+                inserirNaoCheio(m, info, root);
+            }
         }
     }
+    
 
     private void cisao(NodeB<T> node, int indice,int m){
         //node é o nó pai
