@@ -60,7 +60,7 @@ public class BTree<T extends Comparable> {
                 //verifica se a raiz está cheia
                 if(root.getN() == m - 1){
                     //se ela estiver cheia INSERE && FAZ a cisao
-                    cisao(root);
+                    cisao(root,m);
                     //chama insertRaiz dnv pq a raiz pode ter mudado
                     insertRaiz(m, info);
                 }else{
@@ -75,7 +75,7 @@ public class BTree<T extends Comparable> {
     }
 
     private void inserirNaoCheio(int m, T info){
-        
+
     }
 
     public void insert(int m ,T info){
@@ -98,7 +98,42 @@ public class BTree<T extends Comparable> {
         }
     }
 
-    private void cisao(NodeB<T> node){
-        
+    private void cisao(NodeB<T> node, int indice,int m){
+        //node é o nó pai
+
+        NodeB<T> novo;
+        //novo é o irmao de filhoNode
+        NodeB<T> filhoNode;
+        //filhoNode é o node que será repartido
+        novo = new NodeB<T>(m);
+        filhoNode = node.getPonteiro(indice);
+
+        novo.setN(m-1);
+        //move as chaves t-1 de filhoNode pra novo
+        for(int j = 0; j < m-1; j++){
+            novo.setChaves(j, filhoNode.getChaves(j + m));
+        }
+
+        if(!filhoNode.getFolha()){
+            for(int j = 0; j<m; j++){
+                novo.setPonteiro(j, filhoNode.getPonteiro(j+m));
+            }
+        }
+
+        filhoNode.setN(m-1);
+
+        for(int j = node.getN(); j>= indice; j--){
+            node.setPonteiro(j+1, node.getPonteiro(j));
+        }
+
+        node.setPonteiro(indice + 1, novo);
+
+        for(int j = node.getN(); j>= indice; j--){
+            node.setChaves(j+1, node.getChaves(j));
+        }
+
+        node.setChaves(indice, filhoNode.getChaves(indice));
+        node.setN(node.getN() + 1);
+
     }
 }
