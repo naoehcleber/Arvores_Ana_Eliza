@@ -77,7 +77,24 @@ public class BTree<T extends Comparable> {
     private void inserirNaoCheio(int m, T info, NodeB<T> node){
         int i = node.getN();
         if(node.getFolha()){
-            while(i>=1 && )
+            while(i >= 0 && info.compareTo(node.getChaves(i)) < 0){
+                node.setChaves(i+1, node.getChaves(i));
+                i = i - 1;
+            }
+            node.setChaves(i+1, info);
+            node.incrementN();
+        } else{
+            while(i >= 0 && info.compareTo(node.getChaves(i)) < 0){
+                i = i - 1;   
+            }
+            i = i + 1;
+            if(node.getPonteiro(i).getN() == 2*m-1){
+                cisao(node, i, m);
+                if(info.compareTo(node.getChaves(i)) > 0){
+                    i = i+ 1;
+                }
+            }
+            inserirNaoCheio(m, info, node.getPonteiro(i));
         }
     }
 
