@@ -4,7 +4,7 @@ import java.lang.ProcessHandle.Info;
 
 class NodeB<T>{
     private int n; // chaves
-    
+    private NodeB<T> pai;
     private T[] chaves; // array pra guardar as chaves
     private NodeB<T>[] ponteiro;
     private boolean folha;
@@ -14,6 +14,7 @@ class NodeB<T>{
         chaves = (T[]) new Object[m-1];
         ponteiro = new NodeB[m];
         folha = true;
+        pai = null;
         n = 0;
     }
 
@@ -77,5 +78,12 @@ class NodeB<T>{
         }
     }
 
+    public NodeB<T> getPai(){
+        return this.pai;
+    }
+
+    public void setPai(NodeB<T> node){
+        this.pai = node;
+    }
         
 }
