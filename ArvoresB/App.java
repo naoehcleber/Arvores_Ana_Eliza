@@ -2,6 +2,8 @@ import ArvoresB.*;
 import java.util.Scanner;
 
 public class App {
+    private int m = 5;
+
     private static void imprimirMenu(){
             System.out.println("Escolha uma das opcoes:");
             System.out.println("1) Inserir um valor");
@@ -18,7 +20,7 @@ public class App {
             int escolha;
             Scanner scanner = new Scanner(System.in);
             ArvoresB.BTree<Integer> arvore;
-            arvore = new ArvoresB.NodeB<Integer>(5);
+            arvore = new ArvoresB.NodeB<Integer>(m);
     
             imprimirMenu();
             escolha = scanner.nextInt();

@@ -156,4 +156,39 @@ public class BTree<T extends Comparable> {
         node.setN(node.getN() + 1);
 
     }
+
+    private Integer posicaoMaiorChaveNode(NodeB<T> node){
+        T chaveAtual;
+        T maiorChave = node.getChaves(0);
+        int posicaoMaior = 0;
+        if(isEmpty()){
+            return -1;
+        }
+        for(int i = 0; i <= node.getN(); i++){
+            chaveAtual = node.getChaves(i);
+
+            if(chaveAtual.compareTo(maiorChave) > 0){
+                maiorChave = chaveAtual;
+                posicaoMaior = i;
+            }
+        }
+        return posicaoMaior;
+    }
+
+    private NodeB<T> acharMaiorChaveArvore(NodeB<T> node){
+        int pos;
+        if(isEmpty()){
+            return null;
+        }
+
+        //checa se o node é folha
+        if(node.getFolha()){
+            //procura a maior chave do no
+            pos = posicaoMaiorChaveNode(node);
+            
+            return ,pos 
+        }
+        //vai sempre na maior chave da página
+        
+    }
 }
