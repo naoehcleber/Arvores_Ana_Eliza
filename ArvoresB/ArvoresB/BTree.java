@@ -186,14 +186,65 @@ public class BTree<T extends Comparable> {
         return node;
     }
 
-    private NodeB<T> maiorChave(NodeB<T> node){
+    private ResultadoMaiorChave<T> maiorChave(){
         NodeB<T> maiorNode;
-        int pos;
+        Integer pos;
         //acha o maior node
-        maiorNode = acharMaiorNode(node);
+        maiorNode = acharMaiorNode(root);
         //acha a maior chave desse node
         pos = posicaoMaiorChaveNode(maiorNode);
         //retorna tanto o node quanto a posição da chave
-        return maiorNode;
+        return new ResultadoMaiorChave<T>(maiorNode, pos);
+    }
+
+    public void exibirMaiorChave(){
+        ResultadoMaiorChave<T> resultado = maiorChave();
+        System.out.println("Maior chave: " + resultado.getNode().getChaves(resultado.getPos()));
+
+    }
+
+    private Integer posicaoMenorChaveNode(NodeB<T> node){
+        T chaveAtual;
+        T menorChave = node.getChaves(0);
+        int posicaoMenor = 0;
+        if(isEmpty()){
+            return -1;
+        }
+        for(int i = 0; i <= node.getN(); i++){
+            chaveAtual = node.getChaves(i);
+
+            if(chaveAtual.compareTo(menorChave) <= 0){
+                menorChave = chaveAtual;
+                posicaoMenor = i;
+            }
+        }
+        return posicaoMenor;
+    }
+
+    private NodeB<T> acharMenorNode(NodeB<T> node){
+        if(isEmpty()){
+            return null;
+        }
+        //loop para procurar o node mais a esquerda
+        while(node.getFolha() == false){
+            node = node.getPonteiro(0);
+        }
+        return node;
+    }
+
+    private ResultadoMenorChave<T> menorChave(){
+        NodeB<T> menorNode;
+        Integer pos;
+
+        menorNode = acharMenorNode(root);
+        pos = posicaoMenorChaveNode(menorNode);
+
+        return new ResultadoMenorChave<T>(menorNode, pos);
+    }
+
+    public void exibirMenorChave(){
+        ResultadoMenorChave<T> resultado;
+        resultado = menorChave();
+        System.out.println("Menor chave armazenada : " + resultado.getNode().getChaves(resultado.getPos()));
     }
 }
