@@ -175,20 +175,25 @@ public class BTree<T extends Comparable> {
         return posicaoMaior;
     }
 
-    private NodeB<T> acharMaiorChaveArvore(NodeB<T> node){
-        int pos;
+    private NodeB<T> acharMaiorNode(NodeB<T> node){
         if(isEmpty()){
             return null;
         }
-
-        //checa se o node é folha
-        if(node.getFolha()){
-            //procura a maior chave do no
-            pos = posicaoMaiorChaveNode(node);
-            
-            return ,pos 
+        //loop para procurar o node mais a direita
+        while(node.getFolha() == false){
+            node = node.getPonteiro(node.getN());
         }
-        //vai sempre na maior chave da página
-        
+        return node;
+    }
+
+    private NodeB<T> maiorChave(NodeB<T> node){
+        NodeB<T> maiorNode;
+        int pos;
+        //acha o maior node
+        maiorNode = acharMaiorNode(node);
+        //acha a maior chave desse node
+        pos = posicaoMaiorChaveNode(maiorNode);
+        //retorna tanto o node quanto a posição da chave
+        return maiorNode;
     }
 }
