@@ -1,6 +1,5 @@
 package ArvoresB;
 
-import java.lang.ProcessHandle.Info;
 
 class NodeB<T>{
     private int n; // chaves
@@ -8,6 +7,7 @@ class NodeB<T>{
     private T[] chaves; // array pra guardar as chaves
     private NodeB<T>[] ponteiro;
     private boolean folha;
+
   
     // m é o grau
     NodeB(int m){
@@ -19,7 +19,7 @@ class NodeB<T>{
     }
 
     public int getN() {
-        return n;
+        return this.n;
     }
 
     public void setN(int n) {
@@ -64,19 +64,7 @@ class NodeB<T>{
         return this.folha;
     }
 
-    public void adicionarChave(T info){
-        if(n < chaves.length - 1){
-            for(int i = 0; i < chaves.length; i++){
-                if(chaves[i] == null){
-                    chaves[i] = info;
-                    n++;
-                    break;
-                }
-            }
-        } else {
-            return;
-        }
-    }
+    
 
     public NodeB<T> getPai(){
         return this.pai;

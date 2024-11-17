@@ -14,41 +14,60 @@ public class App {
             System.out.println("6) Exibir as chaves da arvore num passeio pre-ordem");
             System.out.println("7) Remover um valor armazenado na arvore");
             System.out.println("8) Exibir a altura da arvore");
+            System.out.println("0) Fechar programa");
         }
     
         public static void main(String[] args) {
-            int escolha;
+            int escolha, num;
+            int m = 5;
             Scanner scanner = new Scanner(System.in);
             ArvoresB.BTree<Integer> arvore;
-            arvore = new ArvoresB.NodeB<Integer>(m);
+            arvore = new BTree<Integer>();
+            
+            arvore.insert(m, 10);    
+            arvore.insert(m,20);
+            arvore.insert(m,30);
+            arvore.insert(m,40);
+            arvore.insert(m,50);
+            arvore.insert(m,60);
+            arvore.insert(m,25);
     
             imprimirMenu();
             escolha = scanner.nextInt();
             switch (escolha) {
                 case 1:
-                    
+                    System.out.println("Insira um numero: ");
+                    num = scanner.nextInt();
+                    arvore.insert(m, num);
                     break;
                 case 2:
-
+                    arvore.exibirMaiorChave();
                     break;
                 case 3:
-
+                    arvore.exibirMenorChave();
                     break;
                 case 4:
-                    
+                    System.out.println("Insira um numero: ");
+                    num = scanner.nextInt();
+                    arvore.retornoBusca(num);
                     
                     break;
                 case 5:
-
+                    arvore.passeioPorNivel();
                     break;
                 case 6:
-
+                    arvore.passeioPreOrdem();
                     break;
                 case 7:
-
+                    System.out.println("Insira um numero: ");
+                    num = scanner.nextInt();
+                    arvore.remover();
                     break;
                 case 8:
-
+                    arvore.calcularAltura();
+                    break;
+                case 0 :
+                    scanner.close();
                     break;
                 default:
                     System.out.println("Opcao invalida");
