@@ -15,7 +15,24 @@ public class BTree<T extends Comparable> {
         }
     }
 
-   
+    public NodeB<T> getRoot(){
+        return this.root;
+    }
+
+   public void exibir(NodeB<T> node){
+        assert  (node == null);
+        //imprime as chaves da arvore
+        for(int i =0; i < node.getN(); i++){
+            System.out.println(node.getChaves(i) + " ");
+        }
+        System.out.println("Fim do node");
+
+        if(!node.getFolha()){
+            for(int i =0; i < node.getN(); i++){
+                exibir(node.getPonteiro(i));
+            }
+        }
+   }
 
     private NodeB<T> search (T info, NodeB<T> node){
         int i = 0;
@@ -51,32 +68,35 @@ public class BTree<T extends Comparable> {
     }
 
     private void adicionarChave(int  m, NodeB<T> node , T info){
-        
-        if(node.getN() < 2 * m - 1){
-            int i = node.getN();
-            if(i == 0){
-                node.setChaves(i, info);
-                node.incrementN();
+        int i;
+        NodeB<T> pai;
+        //verifica se o node tem espaço
+        if(node.getN() < m-1){
+            //define o i
+            i = node.getN() - 1;
+            //verifica se a chave é maior que info
+            while(i >= 0 && info.compareTo(node.getChaves(i)) < 0){
+                //move as chaves maiores pra frente
+                node.setChaves(i+1, node.getChaves(i));
+                i--;
             }
-            while (i>=0 && info.compareTo(node.getChaves(i)) < 0){
-                    //se a info a ser inserido for menor que o elemento na posicao atual do node
-                    //move o elemento para proxima posicao
-                    //checa se a proxima posicao é valida
-                    if(i+1 > 2*m-1){
-                        System.out.println("Node cheio! fazendo cisao");
-                        cisao(node, m);
-                    }
-                    node.setChaves(i+1, node.getChaves(i));
-                    //insere na posicao atual
-                    node.setChaves(i, info);
-                    node.incrementN();
-                }
-
-            
-        } else {
-            System.out.println("Node cheio");
+            //insere a chave
+            node.setChaves(i+1, info);
+            node.incrementN();
+        }else{
+            System.out.println("Em desenvolvimento");
+            //faz a cisao se tiver cheio
             cisao(node, m);
+            pai = new NodeB<T>(m);
+
+            pai = node.getPai();
+            //insere no node da cisao
         }
+
+
+
+        
+
     }
 
     private void insertRaiz(int m, T info){
@@ -105,77 +125,63 @@ public class BTree<T extends Comparable> {
                 cisao(novo, m);
                 insercao(novo, info, m);
             }else{
-                insercao(novo, info, m);
+                insertRaiz(m, info);
            }
         }
     }
     
     private void insercao(NodeB<T> node, T info, int m){
-        NodeB<T> aux;
-        if(node.getFolha()){
-            int i =0;
-            for (i = node.getN()-1; i>= 0 && info.compareTo(node.getChaves(i)) < 0; i--){
-                node.setChaves(i+1, node.getChaves(i));
-            }
-            node.setChaves(i+1, info);
-            node.incrementN();
-        }else {
-            int i =0;
-            for (i = node.getN()-1; i>= 0 && info.compareTo(node.getChaves(i)) < 0; i--){
-                //nada
-            }
-            i++;
-            aux = node.getPonteiro(i);
-            if(aux.getN() == 2*m-1){
-                cisao(node, m);
-                if(info.compareTo(node.getChaves(i)) > 0){
-                    i++;
-                }
-            }
-            insercao(node.getPonteiro(i), info, m);
-        }
+        
     }
 
-    private void cisao(NodeB<T> node, int m){
-        NodeB<T> novo1, novo2, novoPai;
-        T medianaNode;
-        int posMedianaNode;
-        medianaNode = null;
-        posMedianaNode = 0;
-
-        //acha a mediana do node
-        for(int j = 0; j <= j-m; j ++){
-            if(j == j-m){
-                medianaNode = node.getChaves(j);
-                posMedianaNode = j;
-            }
-        }
-        //cria um novo1 com os abaixo da mediana
-        novo1 = new NodeB<T>(m);
-        for(int i = 0; i < posMedianaNode; i++){
-            //insere os abaixo da mediana no node
-            insert(m, novo1.getChaves(i));        
-        }
-        //cria um novo2 com os acima da mediana
+    private void cisao(NodeB<T> nodePai, int m){
+        //cria um novo node
+        NodeB<T> novo, novo2;
+        int j = 0;
+        novo = new NodeB<T>(m);
         novo2 = new NodeB<T>(m);
-        for(int i = posMedianaNode; i < 2*m-1; i++){
-            //insere o q ta acima da mediana no node
-            insert(m, novo2.getChaves(i));
-        }
-        //deixa a mediana no pai
+
         
-        //percorre os ponteiros de node para ver aonde novo se encaixara
-        for(int j = 0; j < m; j++){
-            if(node.getPonteiro(j) == null){
-                node.setPonteiro(j, novo1);
+        while(j < nodePai.getN()){
+            if(j < nodePai.getN()/2){
+                //pega os menores que a mediana e bota em um node novo2
+                novo.setChaves(j, nodePai.getChaves(j));
+                novo.incrementN();
+            }else if (j > nodePai.getN()/2){
+                //pega os maiores que a mediana e bota em um node novo
+                novo2.setChaves(j, nodePai.getChaves(j));
+                novo2.incrementN();
             }
+            j++;
         }
         
-        //checa se ele é root
-        if(node == root){
-               
+
+        //coloca novo e novo2 nos ponteiros do nodePai
+        for(int i = 1; i < m-1; i++){
+            //compara a posicao 
+            System.out.println(i);
+            if(nodePai.getChaves(i)!= null  && novo.getChaves(0).compareTo(nodePai.getChaves(i)) < 0){
+                //se o primeiro elemento do node novo for menor que o elemento do nodePai ele coloca ele na posicao do ponteiro
+                nodePai.setPonteiro(i, novo);
+            }else if(nodePai.getChaves(i)!= null && novo2.getChaves(0).compareTo(nodePai.getChaves(i)) > 0 ){
+                nodePai.setPonteiro(i+1, novo2);
+            }
+
+        }
+        //deixa so a mediana no node pai
+        for(int i = 0; i < nodePai.getN(); i++){
+            //percorre o nodePai
+            //pula a mediana
+            if(i == nodePai.getN()/2){
+                continue;
+            }
+            //muda as chaves pra null
+            nodePai.setChaves(i, null);
+            //decrementa o n
+            nodePai.decrementN();
         }
         
+
     }
 
     private Integer posicaoMaiorChaveNode(NodeB<T> node){
