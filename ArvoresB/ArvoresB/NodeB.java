@@ -11,7 +11,7 @@ class NodeB<T>{
   
     // m é o grau
     NodeB(int m){
-        chaves = (T[]) new Object[m-1];
+        chaves = (T[]) new Object[2*m-1];
         ponteiro = new NodeB[m];
         folha = true;
         pai = null;
@@ -52,12 +52,17 @@ class NodeB<T>{
     }
 
     public void isFolha(){
-        for(NodeB<T> filho : ponteiro){
-            if(filho != null){
+        for(int i = 0; i < ponteiro.length; i++){
+            if(ponteiro[i] == null){
+                this.folha = true;
+            } else {
                 this.folha = false;
             }
-        }
-        this.folha = true;
+        } 
+    }
+
+    public void setFolha(boolean check){
+        this.folha = check;
     }
 
     public boolean getFolha(){
