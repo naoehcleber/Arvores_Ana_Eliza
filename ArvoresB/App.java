@@ -71,10 +71,10 @@ public class App {
                         
                         break;
                     case 5:
-                        arvore.passeioPorNivel();
+                        arvore.passeioPorNivel(arvore.getRoot());
                         break;
                     case 6:
-                        arvore.passeioPreOrdem();
+                        arvore.passeioPreOrdem(arvore.getRoot());
                         break;
                     case 7:
                         System.out.println("Insira um numero: ");

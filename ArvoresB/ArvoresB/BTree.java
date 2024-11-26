@@ -3,6 +3,8 @@ package ArvoresB;
 import org.junit.platform.engine.support.hierarchical.Node;
 
 import ArvoresB.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class BTree<T extends Comparable> {
     private NodeB<T> root;
@@ -36,27 +38,30 @@ public class BTree<T extends Comparable> {
         }
    }
 
-    private NodeB<T> search (T info, NodeB<T> node){
+   private NodeB<T> search(T info, NodeB<T> node) {
         int i = 0;
-        if(node == null){
-            return null;
+        int k =0;
+        System.out.println(node);
+        while(i < node.getN() && info.compareTo(node.getChaves(i)) > 0){
+            
+            i++;
         }
-        while(i <= node.getN() && info.compareTo(node.getChaves(i)) > 0){
-            i+=1;
+        System.out.println(i);
+        if(i == node.getN()){
+            k++;
         }
-
-        if(i <= node.getN() && info.compareTo(node.getChaves(i)) == 0){
+        if(i < node.getN() && info.compareTo(node.getChaves(i)) == 0){
             return node;
-        } else if(node.getFolha()){
+        }
+        if(node.getFolha()){
             return null;
         }
-
-        return search(info, node.getPonteiro(i));
-        
+        return search(info, node.getPonteiro(k));
     }
 
     public T retornoBusca(T info){
         //depois de achar o node a gente tem que ir atrás da posição da chave
+        int pos;
         NodeB<T> busca = search(info, root);
 
         if(busca == null){
@@ -64,12 +69,15 @@ public class BTree<T extends Comparable> {
         }
         
         //retorna o node
-        for(int i = 0; i < busca.getN(); i++){
-            if(info.compareTo(busca.getChaves(i)) == 0){
-                return busca.getChaves(i);
+        pos = 0;
+        for(pos = 0; pos < busca.getN(); pos++){
+            if(info.compareTo(busca.getChaves(pos)) == 0){
+                break;
             }
         }
-        return null;
+        
+        return busca.getChaves(pos);
+        
     }
 
     private void adicionarChave(int  m, NodeB<T> node , T info){
@@ -343,12 +351,53 @@ public class BTree<T extends Comparable> {
         System.out.println("Menor chave armazenada : " + resultado.getNode().getChaves(resultado.getPos()));
     }
 
-    public void passeioPorNivel(){
-
+    public void passeioPorNivel(NodeB<T> root) {
+        if (root == null) {
+            System.out.println("Árvore vazia.");
+            return;
+        }
+    
+        // Fila para armazenar os nós
+        Queue<NodeB<T>> fila = new LinkedList<>();
+        fila.add(root);  // Adiciona a raiz à fila
+    
+        while (!fila.isEmpty()) {
+            NodeB<T> node = fila.poll();  // Remove o nó da frente da fila
+    
+            // Exibe as chaves do nó atual
+            for (int i = 0; i < node.getN(); i++) {
+                System.out.print(node.getChaves(i) + " ");
+            }
+            System.out.println();
+    
+            // Adiciona os filhos à fila, se o nó não for folha
+            if (!node.getFolha()) {
+                for (int i = 0; i <= node.getN(); i++) {
+                    if (node.getPonteiro(i) != null) {
+                        fila.add(node.getPonteiro(i));
+                    }
+                }
+            }
+        }
     }
 
-    public void passeioPreOrdem() {
-
+    public void passeioPreOrdem(NodeB<T> node) {
+        if (node == null) {
+            return;  // Caso base: nó nulo
+        }
+    
+        // Exibe as chaves do nó atual
+        for (int i = 0; i < node.getN(); i++) {
+            System.out.print(node.getChaves(i) + " ");
+        }
+        System.out.println();
+    
+        // Percorre os filhos recursivamente
+        if (!node.getFolha()) {
+            for (int i = 0; i <= node.getN(); i++) {  // Inclui o último ponteiro
+                passeioPreOrdem(node.getPonteiro(i));
+            }
+        }
     }
 
     public void calcularAltura(){
@@ -368,6 +417,6 @@ public class BTree<T extends Comparable> {
     }
 
     public void remover(){
-
+        
     }
 }
