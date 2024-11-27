@@ -26,29 +26,43 @@ public class App {
                 escolha = -1;
                 
                 arvore.insert(m, 10);    
-                arvore.exibir(arvore.getRoot());
+                //arvore.exibir(arvore.getRoot());
     
                 arvore.insert(m,20);
-            arvore.exibir(arvore.getRoot());
+            //arvore.exibir(arvore.getRoot());
 
             arvore.insert(m,30);
-            arvore.exibir(arvore.getRoot());
+            //arvore.exibir(arvore.getRoot());
 
             arvore.insert(m,40);
-            arvore.exibir(arvore.getRoot());
+            //arvore.exibir(arvore.getRoot());
 
             arvore.insert(m,50);
-            // arvore.exibir(arvore.getRoot());
+            //arvore.exibir(arvore.getRoot());
 
             arvore.insert(m,60);
             //arvore.exibir(arvore.getRoot());
 
             arvore.insert(m,25);
             //arvore.exibir(arvore.getRoot());
+
+            arvore.insert(m, 70);
+            arvore.insert(m, 80);
+            // arvore.insert(m, 90);
+            // arvore.insert(m, 100);
+            // arvore.insert(m, 110);
+            // arvore.insert(m, 35);
+            // arvore.insert(m, 45);
+            // arvore.insert(m, 55);
+            // arvore.insert(m, 75);
+            // arvore.insert(m, 85);
+            // arvore.insert(m, 86);
+
+
             
 
             while(escolha != 0){
-                arvore.exibir(arvore.getRoot());
+                //arvore.exibir(arvore.getRoot());
                 imprimirMenu();
                 escolha = scanner.nextInt();
                 switch (escolha) {
@@ -79,7 +93,7 @@ public class App {
                     case 7:
                         System.out.println("Insira um numero: ");
                         num = scanner.nextInt();
-                        arvore.remover();
+                        arvore.remover(m,num);
                         break;
                     case 8:
                         arvore.calcularAltura();
