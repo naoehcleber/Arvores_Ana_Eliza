@@ -21,7 +21,7 @@ public class BTree<T extends Comparable> {
         return this.root;
     }
 
-   public void exibir(NodeB<T> node){
+   public void exibir(int m ,NodeB<T> node){
         if(node == null){
             return;
         }
@@ -32,8 +32,8 @@ public class BTree<T extends Comparable> {
         System.out.println("Fim do node");
 
         if(!node.getFolha()){
-            for(int i =0; i < node.getN(); i++){
-                exibir(node.getPonteiro(i));
+            for(int i =0; i < m-1; i++){
+                exibir(m,node.getPonteiro(i));
             }
         }
    }
@@ -159,7 +159,7 @@ public class BTree<T extends Comparable> {
                         break; // Stop traversal if the child pointer is null
                     }
 
-                    if (i < node.getN()) {
+                    if (i < 2*m-1) {
                         while (i < node.getN() && node.getChaves(i).compareTo(info) < 0) {
                             i++;
                         }

@@ -48,21 +48,23 @@ public class App {
 
             arvore.insert(m, 70);
             arvore.insert(m, 80);
-            // arvore.insert(m, 90);
-            // arvore.insert(m, 100);
-            // arvore.insert(m, 110);
-            // arvore.insert(m, 35);
-            // arvore.insert(m, 45);
-            // arvore.insert(m, 55);
-            // arvore.insert(m, 75);
-            // arvore.insert(m, 85);
-            // arvore.insert(m, 86);
+            arvore.insert(m, 15);
+            
+             arvore.insert(m, 90);
+             arvore.insert(m, 100);
+             arvore.insert(m, 110);
+             arvore.insert(m, 35);
+             arvore.insert(m, 45);
+             arvore.insert(m, 55);
+             arvore.insert(m, 75);
+             arvore.insert(m, 85);
+             arvore.insert(m, 86);
 
 
             
 
             while(escolha != 0){
-                //arvore.exibir(arvore.getRoot());
+                arvore.exibir(m,arvore.getRoot());
                 imprimirMenu();
                 escolha = scanner.nextInt();
                 switch (escolha) {
